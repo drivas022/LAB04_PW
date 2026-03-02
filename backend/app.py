@@ -30,6 +30,47 @@ class Song(db.Model):
             "artist": self.artist
         }
 
+# Ruta simple para probar si el bacckend responde
+@app.route("/")
+def home():
+    return "¡Hola desde Flask!"
+
+# Get canciones: devuelve una lista de canciones en formato JSON
+@app.route("/songs", methods=["GET"])
+def get_song():
+    # Song.query es ORM: hace consultas a la tabla sin SQL
+    # Order_by ordena por idSong, all() devuelve todas las filas como objetos Song
+    songs = Song.query.order_by(Song.idSong.desc()).all()
+
+    # convertimos cada Song a dict y devolvemos una lista de JSON
+    return jsonify([s.to_dict() for s in songs]), 200 # 200 es el código HTTP de éxito
+
+# Post canciones: ruta para crear/agregar una canción
+@app.route("/songs", methods=["POST"])
+def add_song():
+    # request.get_json() lee el JSon que mande React/Postman 
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No se proporcionó ningún dato"}), 400 # 400 es el código HTTP de error por mala solicitud
+    
+    # Agarramos el name y artist del JSON
+    songName = (data.get("songName") or "").strip() # .strip() elimina espacios al inicio/final
+    artist = (data.get("artist") or "").strip()
+
+    # Validamos ambos campos son obligatorios
+    if not songName or not artist:
+        return jsonify({"error": "Los campos 'songName' y 'artist' son obligatorios"}), 400
+
+    # Creamos un nuevo objeto Song con los datos, aqui es donde ORM reemplaza el INSERT SQL
+    song = Song(songName=songName, artist=artist)
+
+    db.session.add(song) # Agregamos el objeto a la sesión (como “preparar” el insert)
+    db.session.commit() # Confirmamos los cambios en la base (aquí se guarda de verdad en songs.db)
+    
+    return jsonify(song.to_dict()), 201 # Devolvemos la canción creada como JSON, 201 es el código HTTP de recurso creado
+
+
 # Este bloque solo se ejecuta si corres el archivo directamente: python app.py
 if __name__ == "__main__":
     # necesitamos un contexto de la app para que SQLAlchemy pueda crear las tablas
