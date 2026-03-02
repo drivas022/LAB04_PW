@@ -4,8 +4,8 @@ from flask_sqlalchemy import SQLAlchemy # es le ORM, permite crear modelos (clas
 
 
 # llamando dependencias e inicializando la app
-app = Flask(__file__)
-CORS(app) # Esto permite llamadas desde http://localhost:3000 hacia http://localhost:5000.
+app = Flask(__name__)
+CORS(app) # Esto permite llamadas desde http://localhost:3000 hacia http://localhost:5001.
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///songs.db" # URI de la base de datos, sqlite es un motor de base de datos liviano que guarda todo en un archivo local llamado songs.db
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False # Desactiva el seguimiento de modificaciones para mejorar el rendimiento

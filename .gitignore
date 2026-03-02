@@ -37,3 +37,7 @@ backend/.pytest_cache/
 
 # General
 .DS_Store
+
+# BD
+backend/instance/
+backend/*.db
