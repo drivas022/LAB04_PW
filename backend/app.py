@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy # es le ORM, permite crear modelos (clas
 app = Flask(__file__)
 CORS(app) # Esto permite llamadas desde http://localhost:3000 hacia http://localhost:5000.
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///songs.db" # URI de la base de datos, sqllite es un motor de base de datos liviano que guarda todo en un archivo local llamado songs.db
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///songs.db" # URI de la base de datos, sqlite es un motor de base de datos liviano que guarda todo en un archivo local llamado songs.db
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False # Desactiva el seguimiento de modificaciones para mejorar el rendimiento
 
 db = SQLAlchemy(app) # Inicializa SQLAlchemy con la aplicación Flask
@@ -78,4 +78,4 @@ if __name__ == "__main__":
         db.create_all() # Crea las tablas si no existen (songs.db + tabla songs)
 
     # corre el servidor en el puerto 5000, debug=True reinicia automáticamente cuando guardas cambios (para desarrollo)
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)
