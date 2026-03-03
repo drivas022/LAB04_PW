@@ -1,38 +1,228 @@
-.App {
-  text-align: center;
+:root{
+  --bg: #0b0b10;
+  --card: rgba(255,255,255,0.06);
+  --stroke: rgba(255,255,255,0.10);
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.60);
+  --shadow: 0 20px 60px rgba(0,0,0,0.45);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+*{ box-sizing: border-box; }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.page{
   min-height: 100vh;
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(255, 45, 85, 0.18), transparent 60%),
+              radial-gradient(1000px 500px at 90% 10%, rgba(94, 92, 230, 0.16), transparent 55%),
+              var(--bg);
+  color: var(--text);
+}
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(18px);
+  background: rgba(11,11,16,0.55);
+  border-bottom: 1px solid var(--stroke);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 16px;
+  padding: 18px 20px;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 180px;
+}
+
+.logoDot{
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff2d55, #5e5ce6);
+  box-shadow: 0 0 0 6px rgba(255,45,85,0.10);
+}
+
+.brandTitle{
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  font-weight: 600;
+}
+
+.brandSub{
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.search{
+  flex: 1;
+  max-width: 520px;
+  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 12px 14px;
+  outline: none;
+}
+
+.search::placeholder{
+  color: rgba(255,255,255,0.45);
+}
+
+.container{
+  width: min(980px, 92vw);
+  margin: 26px auto;
+  display: grid;
+  gap: 16px;
+}
+
+.card{
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.cardHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.cardHeader h3{
+  margin: 0;
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: 0.2px;
+}
+
+.pill{
+  font-size: 12px;
+  color: rgba(255,255,255,0.78);
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+}
+
+.muted{
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.form{
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  padding: 16px;
+}
+
+.field label{
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.field input{
+  width: 100%;
+  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 12px 12px;
+  outline: none;
+}
+
+.field input::placeholder{
+  color: rgba(255,255,255,0.45);
+}
+
+.btn{
+  align-self: end;
+  border: none;
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #ff2d55, #ff375f);
   color: white;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(255,45,85,0.25);
 }
 
-.App-link {
-  color: #61dafb;
+.btn:active{
+  transform: translateY(1px);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.error{
+  margin: 0 16px 16px 16px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,45,85,0.28);
+  background: rgba(255,45,85,0.12);
+  color: rgba(255,255,255,0.92);
+  font-size: 12px;
+}
+
+.list{
+  padding: 8px;
+}
+
+.row{
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 10px;
+  border-radius: 14px;
+}
+
+.row:hover{
+  background: rgba(255,255,255,0.05);
+}
+
+.cover{
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255,45,85,0.9), rgba(94,92,230,0.9));
+}
+
+.meta .title{
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.2px;
+}
+
+.meta .subtitle{
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.right{
+  text-align: right;
+}
+
+.tiny{
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+}
+
+.empty{
+  padding: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.footer{
+  width: min(980px, 92vw);
+  margin: 0 auto 26px auto;
+  padding: 0 4px;
 }
